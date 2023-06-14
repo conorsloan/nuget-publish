@@ -1,0 +1,29 @@
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  DOTNET_NOLOGO: true
+  VERSION: "1.1.${{ github.run_number }}"
+  PACKAGES_URL: https://nuget.pkg.github.com
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+   
+      - name: Look at package
+        run: dotnet nuget list nuget-publish -Version 1.1.1 -AllVersions -Detail --api-key ${{ secrets.GITHUB_TOKEN }} --source ${{ env.PACKAGES_URL }}/${{ github.repository_owner }}/index.json
+
+     
