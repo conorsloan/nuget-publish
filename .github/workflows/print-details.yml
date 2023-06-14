@@ -24,6 +24,6 @@ jobs:
           dotnet-version: 3.1.x
    
       - name: Look at package
-        run: dotnet nuget list nuget-publish -Version 1.1.1 -AllVersions -Detail --api-key ${{ secrets.GITHUB_TOKEN }} --source ${{ env.PACKAGES_URL }}/${{ github.repository_owner }}/index.json
+        run: dotnet nuget list -Package nuget-publish -Version 1.1.1 -AllVersions -Detail --api-key ${{ secrets.GITHUB_TOKEN }} --source ${{ env.PACKAGES_URL }}/${{ github.repository_owner }}/index.json
 
      
